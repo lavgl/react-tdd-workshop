@@ -41,4 +41,26 @@ describe('Tic Tac Toe', () => {
     await driver.clickACellAt(2);
     expect(await driver.getWinnerMessage()).toBe(`${player1} won!`);
   });
+
+  // test('players have no wins on first game started', async () => {
+  //   const player1 = 'Yaniv';
+  //   const player2 = 'Computer';
+  //   await driver.newGame(player1, player2);
+  //   expect(await driver.getPlayer1Wins()).toBe('0');
+  //   expect(await driver.getPlayer2Wins()).toBe('0');
+  // });
+
+  // test('player 1 should have 1 when wins on first game', async () => {
+  //   const player1 = 'Yaniv';
+  //   const player2 = 'Computer';
+  //   await driver.newGame(player1, player2);
+  //   await driver.clickACellAt(0);
+  //   await driver.clickACellAt(3);
+  //   await driver.clickACellAt(1);
+  //   await driver.clickACellAt(4);
+  //   await driver.clickACellAt(2);
+  //   expect(await driver.getPlayer1Wins()).toBe('1');
+  //   expect(await driver.getPlayer2Wins()).toBe('0');
+  // });
+
 });

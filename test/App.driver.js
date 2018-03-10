@@ -6,7 +6,9 @@ const appDriver = page => ({
     await page.click('[data-hook="new-game"]');
   },
   getPlayer1Title: () => page.$eval('[data-hook="p1-name"]', el => el.innerText),
+  getPlayer1Wins: () => page.$eval('[data-hook="p1-wins"]', el => el.innerText),
   getPlayer2Title: () => page.$eval('[data-hook="p2-name"]', el => el.innerText),
+  getPlayer2Wins: () => page.$eval('[data-hook="p2-wins"]', el => el.innerText),
   clickACellAt: index => page.$$eval('[data-hook="cell"]', (cells, i) => cells[i].click(), index),
   getACellValueAt: index =>
     page.$$eval('[data-hook="cell"]', (cells, i) => cells[i].innerText, index),

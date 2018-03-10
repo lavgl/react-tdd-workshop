@@ -2,3 +2,7 @@
   border-style: solid;
   border-color: green;
 }
+
+span {
+  margin: 8px;
+}

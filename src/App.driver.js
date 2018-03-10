@@ -26,6 +26,8 @@ const appDriver = () => {
     isBoardEmpty: () => wrapper.find('[data-hook="cell"]').reduce((empty = true, cell) => empty && cell.text() === ''),
     isPlayer1Selected: () => wrapper.find('[data-hook="p1-name"]').hasClass('selected'),
     isPlayer2Selected: () => wrapper.find('[data-hook="p2-name"]').hasClass('selected'),
+    getPlayer1Wins: () => wrapper.find('[data-hook="p1-wins"]').text(),
+    getPlayer2Wins: () => wrapper.find('[data-hook="p2-wins"]').text(),
     getWinnerMessage: () => wrapper.find('[data-hook="winner-message"]').text(),
     isRegistrationVisible: () => wrapper.find('[data-hook="registration"]').length === 1,
     isGameBoardVisible: () => wrapper.find('[data-hook="game-board"]').length === 1,

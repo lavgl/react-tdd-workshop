@@ -128,3 +128,32 @@ it('board should be empty on new game click after one ended', () => {
   expect(driver.isBoardEmpty()).toBeTruthy();
 });
 
+it('players should have zeros on first game start', () => {
+  driver.newGame(p1Name, p2Name);
+  expect(driver.getPlayer1Wins()).toBe('0');
+  expect(driver.getPlayer2Wins()).toBe('0');
+});
+
+it('"X" should have 1 win after first game won', () => {
+  driver.newGame(p1Name, p2Name);
+  driver.clickACellAt(0);
+  driver.clickACellAt(3);
+  driver.clickACellAt(1);
+  driver.clickACellAt(4);
+  driver.clickACellAt(2);
+  expect(driver.getPlayer1Wins()).toBe('1');
+  expect(driver.getPlayer2Wins()).toBe('0');
+});
+
+it('"0" should have 1 win after first game won', () => {
+  driver.newGame(p1Name, p2Name);
+  driver.clickACellAt(4);
+  driver.clickACellAt(0);
+  driver.clickACellAt(5);
+  driver.clickACellAt(1);
+  driver.clickACellAt(7);
+  driver.clickACellAt(2);
+  expect(driver.getPlayer1Wins()).toBe('0');
+  expect(driver.getPlayer2Wins()).toBe('1');
+});
+

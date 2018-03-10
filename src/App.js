@@ -15,6 +15,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
+      p1Wins: 0,
+      p2Wins: 0,
       p1Name: '',
       p2Name: '',
       board: EmptyBoard,
@@ -34,6 +36,15 @@ class App extends React.Component {
     const board = this.state.board.map(row => [...row]);
     board[rIndex][cIndex] = this.state.currentPlayer;
     const status = gameStatus(board);
+    switch (status) {
+      case 'X':
+        this.setState({ p1Wins: this.state.p1Wins + 1 });
+        break;
+      case 'O':
+        this.setState({ p2Wins: this.state.p2Wins + 1 });
+        break;
+      default:
+    }
     if (status) {
       this.setState({ winner: status });
     }
@@ -73,7 +84,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { board, p1Name, p2Name, currentPlayer } = this.state;
+    const { board, p1Name, p2Name, currentPlayer, p1Wins, p2Wins } = this.state;
     return (
       <div className="App">
         {!haveNewGameBeenStarted(p1Name, p2Name) ? (
@@ -85,6 +96,8 @@ class App extends React.Component {
             board={board}
             p1Name={p1Name}
             p2Name={p2Name}
+            p1Wins={p1Wins}
+            p2Wins={p2Wins}
             nextPlayer={currentPlayer === 'X' ? p1Name : p2Name}
           />
         ) : null}
