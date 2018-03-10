@@ -28,7 +28,6 @@ class App extends React.Component {
     const status = gameStatus(board);
     if (status) {
       this.setState({ winner: status });
-      return;
     }
     const nextPlayer = this.state.currentPlayer === 'X' ? 'O' : 'X';
     this.setState({ board, currentPlayer: nextPlayer });
