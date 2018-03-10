@@ -1,11 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Game = ({ p1Name, p2Name, board, onCellClicked }) => {
+import './Game.css';
+
+const Game = ({ p1Name, p2Name, nextPlayer, board, onCellClicked }) => {
   return (
     <div data-hook="game-board">
-      <span data-hook="p1-name">{p1Name}</span>
-      <span data-hook="p2-name">{p2Name}</span>
+      <span data-hook="p1-name" className={nextPlayer === p1Name ? 'selected' : ''}>
+        {p1Name}
+      </span>
+      <span data-hook="p2-name" className={nextPlayer === p2Name ? 'selected' : ''}>
+        {p2Name}
+      </span>
       <table role="grid">
         <tbody>
           {board.map((row, rIndex) => (

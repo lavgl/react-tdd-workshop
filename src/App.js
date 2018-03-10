@@ -60,17 +60,19 @@ class App extends React.Component {
   };
 
   render() {
+    const { board, p1Name, p2Name, currentPlayer } = this.state;
     return (
       <div className="App">
-        {!haveNewGameBeenStarted(this.state.p1Name, this.state.p2Name) ? (
+        {!haveNewGameBeenStarted(p1Name, p2Name) ? (
           <Registration onNewGame={this.onNewGame} />
         ) : null}
-        {haveNewGameBeenStarted(this.state.p1Name, this.state.p2Name) ? (
+        {haveNewGameBeenStarted(p1Name, p2Name) ? (
           <Game
             onCellClicked={this.handleCellClick}
-            board={this.state.board}
-            p1Name={this.state.p1Name}
-            p2Name={this.state.p2Name}
+            board={board}
+            p1Name={p1Name}
+            p2Name={p2Name}
+            nextPlayer={currentPlayer === 'X' ? p1Name : p2Name}
           />
         ) : null}
         {this.renderMessage()}

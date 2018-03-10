@@ -22,6 +22,8 @@ const appDriver = () => {
         .find('[data-hook="cell"]')
         .at(index)
         .text(),
+    isPlayer1Selected: () => wrapper.find('[data-hook="p1-name"]').hasClass('selected'),
+    isPlayer2Selected: () => wrapper.find('[data-hook="p2-name"]').hasClass('selected'),
     getWinnerMessage: () => wrapper.find('[data-hook="winner-message"]').text(),
     isRegistrationVisible: () => wrapper.find('[data-hook="registration"]').length === 1,
     isGameBoardVisible: () => wrapper.find('[data-hook="game-board"]').length === 1,
