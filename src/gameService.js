@@ -10,11 +10,8 @@ export const doesWinByDiagonalLine = (symbol, board) => {
   const leftTopToBottomRightIndexes = [[0, 0], [1, 1], [2, 2]];
   const rightTopToBottomLeftIndexes = [[0, 2], [1, 1], [2, 0]];
 
-  return [
-    leftTopToBottomRightIndexes,
-    rightTopToBottomLeftIndexes
-  ].some(indexes =>
-    indexes.every(([ rowIndex, columnIndex ]) => board[rowIndex][columnIndex] === symbol)
+  return [leftTopToBottomRightIndexes, rightTopToBottomLeftIndexes].some(indexes =>
+    indexes.every(([rowIndex, columnIndex]) => board[rowIndex][columnIndex] === symbol),
   );
 };
 
@@ -40,11 +37,16 @@ const isWin = (symbol, board) => {
   return win;
 };
 
+const isBoardFull = board => board.every(row => row.every(cell => cell));
+
 export const gameStatus = board => {
   if (isWin('X', board)) {
     return 'X';
   }
   if (isWin('O', board)) {
     return 'O';
+  }
+  if (isBoardFull(board)) {
+    return '-';
   }
 };

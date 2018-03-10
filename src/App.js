@@ -25,12 +25,36 @@ class App extends React.Component {
     }
     const board = this.state.board.map(row => [...row]);
     board[rIndex][cIndex] = this.state.currentPlayer;
-    if (gameStatus(board) === this.state.currentPlayer) {
-      this.setState({ winner: this.state.currentPlayer });
+    const status = gameStatus(board);
+    if (status) {
+      this.setState({ winner: status });
+      return;
     }
     const nextPlayer = this.state.currentPlayer === 'X' ? 'O' : 'X';
     this.setState({ board, currentPlayer: nextPlayer });
   };
+
+  renderMessage = () => {
+    if (!this.state.winner) {
+      return;
+    }
+    let message;
+    switch (this.state.winner) {
+      case '-':
+        message = "It's a tie!";
+        break;
+      case 'X':
+        message = `${this.state.p1Name} won!`;
+        break;
+      case 'O':
+        message = `${this.state.p2Name} won!`;
+        break;
+      default:
+        return;
+    }
+    return <div data-hook="winner-message">{message}</div>;
+  };
+
   render() {
     return (
       <div className="App">
@@ -41,11 +65,7 @@ class App extends React.Component {
           p1Name={this.state.p1Name}
           p2Name={this.state.p2Name}
         />
-        {this.state.winner && (
-          <div data-hook="winner-message">
-            {`${this.state.winner === 'X' ? this.state.p1Name : this.state.p2Name} won!`}
-          </div>
-        )}
+        {this.renderMessage()}
       </div>
     );
   }
