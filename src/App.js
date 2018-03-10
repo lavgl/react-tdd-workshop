@@ -8,20 +8,23 @@ const haveNewGameBeenStarted = (p1Name, p2Name) => {
   return p1Name && p1Name !== '' && p2Name && p2Name !== '';
 };
 
+const EmptyBoard = [['', '', ''], ['', '', ''], ['', '', '']];
+const FirstPlayer = 'X';
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       p1Name: '',
       p2Name: '',
-      board: [['', '', ''], ['', '', ''], ['', '', '']],
+      board: EmptyBoard,
       winner: '',
-      currentPlayer: 'X',
+      currentPlayer: FirstPlayer,
     };
   }
 
   onNewGame = ({ p1Name, p2Name }) => {
-    this.setState({ p1Name, p2Name });
+    this.setState({ p1Name, p2Name, board: EmptyBoard, currentPlayer: FirstPlayer });
   };
 
   handleCellClick = (rIndex, cIndex) => {
@@ -38,7 +41,7 @@ class App extends React.Component {
     this.setState({ board, currentPlayer: nextPlayer });
   };
 
-  renderMessage = () => {
+  renderGameOver = () => {
     if (!this.state.winner) {
       return;
     }
@@ -56,7 +59,17 @@ class App extends React.Component {
       default:
         return;
     }
-    return <div data-hook="winner-message">{message}</div>;
+    return (
+      <div>
+        <div data-hook="winner-message">{message}</div>
+        <button
+          onClick={() => this.onNewGame({ p1Name: this.state.p1Name, p2Name: this.state.p2Name })}
+          data-hook="new-game"
+        >
+          New Game
+        </button>
+      </div>
+    );
   };
 
   render() {
@@ -75,7 +88,7 @@ class App extends React.Component {
             nextPlayer={currentPlayer === 'X' ? p1Name : p2Name}
           />
         ) : null}
-        {this.renderMessage()}
+        {this.renderGameOver()}
       </div>
     );
   }

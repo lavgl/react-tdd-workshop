@@ -91,3 +91,40 @@ it('should hide game board before game starts', () => {
   driver.newGame(p1Name, p2Name);
   expect(driver.isGameBoardVisible()).toBeTruthy();
 });
+
+it('should show new game button on game end', () => {
+  driver.newGame(p1Name, p2Name);
+  expect(driver.isNewGameButtonVisible()).toBeFalsy();
+  driver.clickACellAt(0);
+  driver.clickACellAt(3);
+  driver.clickACellAt(1);
+  driver.clickACellAt(4);
+  driver.clickACellAt(2);
+  expect(driver.isNewGameButtonVisible()).toBeTruthy();
+});
+
+it('player should be reset on on new game click after one ended', () => {
+  driver.newGame(p1Name, p2Name);
+  expect(driver.isPlayer1Selected()).toBeTruthy();
+  driver.clickACellAt(0);
+  driver.clickACellAt(3);
+  driver.clickACellAt(1);
+  driver.clickACellAt(4);
+  driver.clickACellAt(2);
+  driver.nextGame();
+  expect(driver.isPlayer1Selected()).toBeTruthy();
+});
+
+it('board should be empty on new game click after one ended', () => {
+  driver.newGame(p1Name, p2Name);
+  expect(driver.isBoardEmpty()).toBeTruthy();
+  driver.clickACellAt(0);
+  driver.clickACellAt(3);
+  driver.clickACellAt(1);
+  driver.clickACellAt(4);
+  driver.clickACellAt(2);
+  expect(driver.isBoardEmpty()).toBeFalsy();
+  driver.nextGame();
+  expect(driver.isBoardEmpty()).toBeTruthy();
+});
+
