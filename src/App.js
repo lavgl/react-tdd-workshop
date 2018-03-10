@@ -55,6 +55,15 @@ class App extends React.Component {
     this.setState({ board, currentPlayer: nextPlayer });
   };
 
+  saveState = () => {
+    localStorage.setItem('game', JSON.stringify(this.state));
+  };
+
+  loadState = () => {
+    const gameState = localStorage.getItem('game');
+    this.setState(JSON.parse(gameState));
+  };
+
   renderGameOver = () => {
     if (!this.state.winner) {
       return;
@@ -93,6 +102,14 @@ class App extends React.Component {
         {!haveNewGameBeenStarted(p1Name, p2Name) ? (
           <Registration onNewGame={this.onNewGame} />
         ) : null}
+        <div>
+          <button data-hook="save-state" onClick={() => this.saveState()}>
+            Save state
+          </button>
+          <button data-hook="load-state" onClick={() => this.loadState()}>
+            Load state
+          </button>
+        </div>
         {haveNewGameBeenStarted(p1Name, p2Name) ? (
           <Game
             onCellClicked={this.handleCellClick}
