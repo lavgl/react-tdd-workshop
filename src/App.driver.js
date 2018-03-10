@@ -24,6 +24,7 @@ const appDriver = () => {
         .text(),
     getWinnerMessage: () => wrapper.find('[data-hook="winner-message"]').text(),
     isRegistrationVisible: () => wrapper.find('[data-hook="registration"]').length === 1,
+    isGameBoardVisible: () => wrapper.find('[data-hook="game-board"]').length === 1,
   };
 };
 

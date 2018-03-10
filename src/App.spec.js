@@ -65,3 +65,9 @@ test('should hide registration after game starts', () => {
   driver.newGame(p1Name, p2Name);
   expect(driver.isRegistrationVisible()).toBeFalsy();
 });
+
+it('should hide game board before game starts', () => {
+  expect(driver.isGameBoardVisible()).toBeFalsy();
+  driver.newGame(p1Name, p2Name);
+  expect(driver.isGameBoardVisible()).toBeTruthy();
+});

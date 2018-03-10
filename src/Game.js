@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Game = ({ p1Name, p2Name, board, onCellClicked }) => {
   return (
-    <div>
+    <div data-hook="game-board">
       <span data-hook="p1-name">{p1Name}</span>
       <span data-hook="p2-name">{p2Name}</span>
       <table role="grid">
