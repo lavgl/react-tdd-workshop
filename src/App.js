@@ -26,7 +26,7 @@ class App extends React.Component {
   }
 
   onNewGame = ({ p1Name, p2Name }) => {
-    this.setState({ p1Name, p2Name, board: EmptyBoard, currentPlayer: FirstPlayer });
+    this.setState({ p1Name, p2Name, board: EmptyBoard, currentPlayer: FirstPlayer, winner: '' });
   };
 
   handleCellClick = (rIndex, cIndex) => {

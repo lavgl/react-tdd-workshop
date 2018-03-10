@@ -103,6 +103,18 @@ it('should show new game button on game end', () => {
   expect(driver.isNewGameButtonVisible()).toBeTruthy();
 });
 
+it('"New game" button should be hidden on new game stated', () => {
+  driver.newGame(p1Name, p2Name);
+  expect(driver.isPlayer1Selected()).toBeTruthy();
+  driver.clickACellAt(0);
+  driver.clickACellAt(3);
+  driver.clickACellAt(1);
+  driver.clickACellAt(4);
+  driver.clickACellAt(2);
+  driver.nextGame();
+  expect(driver.isNewGameButtonVisible()).toBeFalsy();
+});
+
 it('player should be reset on on new game click after one ended', () => {
   driver.newGame(p1Name, p2Name);
   expect(driver.isPlayer1Selected()).toBeTruthy();
