@@ -62,22 +62,22 @@ test('message should be shown on tie game', () => {
 
 test('first player selected on game start', () => {
   driver.newGame(p1Name, p2Name);
-  expect(driver.isPlayer1Selected()).toBe(true);
+  expect(driver.isPlayer1Selected()).toBeTruthy();
 });
 
 test('second player should be selected after first one clicked', () => {
   driver.newGame(p1Name, p2Name);
   driver.clickACellAt(4);
-  expect(driver.isPlayer2Selected()).toBe(true);
+  expect(driver.isPlayer2Selected()).toBeTruthy();
 });
 
 test('only player can be selected', () => {
   driver.newGame(p1Name, p2Name);
-  expect(driver.isPlayer1Selected()).toBe(true);
-  expect(driver.isPlayer2Selected()).toBe(false);
+  expect(driver.isPlayer1Selected()).toBeTruthy();
+  expect(driver.isPlayer2Selected()).toBeFalsy();
   driver.clickACellAt(4);
-  expect(driver.isPlayer1Selected()).toBe(false);
-  expect(driver.isPlayer2Selected()).toBe(true);
+  expect(driver.isPlayer1Selected()).toBeFalsy();
+  expect(driver.isPlayer2Selected()).toBeTruthy();
 });
 
 test('should hide registration after game starts', () => {
