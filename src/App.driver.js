@@ -23,6 +23,7 @@ const appDriver = () => {
         .at(index)
         .text(),
     getWinnerMessage: () => wrapper.find('[data-hook="winner-message"]').text(),
+    isRegistrationVisible: () => wrapper.find('[data-hook="registration"]').length === 1,
   };
 };
 

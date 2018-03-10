@@ -7,7 +7,13 @@ import appDriver from './App.driver';
 
 configure({ adapter: new Adapter() });
 let driver;
-beforeEach(() => (driver = appDriver()));
+const p1Name = 'Yaniv';
+const p2Name = 'Computer';
+
+beforeEach(() => {
+  driver = appDriver();
+  driver.render(<App />);
+});
 
 test('renders without crashing', () => {
   const div = document.createElement('div');
@@ -16,9 +22,6 @@ test('renders without crashing', () => {
 });
 
 test('should show "O" after second player clicks', () => {
-  const p1Name = 'Yaniv';
-  const p2Name = 'Computer';
-  driver.render(<App />);
   driver.newGame(p1Name, p2Name);
   driver.clickACellAt(0);
   driver.clickACellAt(1);
@@ -26,9 +29,6 @@ test('should show "O" after second player clicks', () => {
 });
 
 test('"O" should win the game', () => {
-  const p1Name = 'Yaniv';
-  const p2Name = 'Computer';
-  driver.render(<App />);
   driver.newGame(p1Name, p2Name);
   driver.clickACellAt(4);
   driver.clickACellAt(0);
@@ -40,9 +40,6 @@ test('"O" should win the game', () => {
 });
 
 test('user should not be able to press non-empty cell', () => {
-  const p1Name = 'Yaniv';
-  const p2Name = 'Computer';
-  driver.render(<App />);
   driver.newGame(p1Name, p2Name);
   driver.clickACellAt(4);
   driver.clickACellAt(4);
@@ -50,9 +47,6 @@ test('user should not be able to press non-empty cell', () => {
 });
 
 test('message should be shown on tie game', () => {
-  const p1Name = 'Yaniv';
-  const p2Name = 'Computer';
-  driver.render(<App />);
   driver.newGame(p1Name, p2Name);
   driver.clickACellAt(4);
   driver.clickACellAt(7);
@@ -64,4 +58,10 @@ test('message should be shown on tie game', () => {
   driver.clickACellAt(5);
   driver.clickACellAt(1);
   expect(driver.getWinnerMessage()).toBe("It's a tie!");
+});
+
+test('should hide registration after game starts', () => {
+  expect(driver.isRegistrationVisible()).toBeTruthy();
+  driver.newGame(p1Name, p2Name);
+  expect(driver.isRegistrationVisible()).toBeFalsy();
 });

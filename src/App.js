@@ -4,6 +4,10 @@ import Game from './Game';
 import { gameStatus } from './gameService';
 import './App.css';
 
+const haveNewGameBeenStarted = (p1Name, p2Name) => {
+  return p1Name && p1Name !== '' && p2Name && p2Name !== '';
+};
+
 class App extends React.Component {
   constructor() {
     super();
@@ -15,6 +19,7 @@ class App extends React.Component {
       currentPlayer: 'X',
     };
   }
+
   onNewGame = ({ p1Name, p2Name }) => {
     this.setState({ p1Name, p2Name });
   };
@@ -57,7 +62,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Registration onNewGame={this.onNewGame} />
+        {!haveNewGameBeenStarted(this.state.p1Name, this.state.p2Name) ? (
+          <Registration onNewGame={this.onNewGame} />
+        ) : null}
         <Game
           onCellClicked={this.handleCellClick}
           board={this.state.board}
