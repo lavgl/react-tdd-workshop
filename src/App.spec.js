@@ -127,6 +127,18 @@ it('player should be reset on on new game click after one ended', () => {
   expect(driver.isPlayer1Selected()).toBeTruthy();
 });
 
+it('player should not be able to continue fill board on game ended', () => {
+  driver.newGame(p1Name, p2Name);
+  expect(driver.isPlayer1Selected()).toBeTruthy();
+  driver.clickACellAt(0);
+  driver.clickACellAt(3);
+  driver.clickACellAt(1);
+  driver.clickACellAt(4);
+  driver.clickACellAt(2);
+  driver.clickACellAt(5);
+  expect(driver.getACellAt(5)).toBe('');
+});
+
 it('board should be empty on new game click after one ended', () => {
   driver.newGame(p1Name, p2Name);
   expect(driver.isBoardEmpty()).toBeTruthy();

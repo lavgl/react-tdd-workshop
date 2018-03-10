@@ -30,6 +30,9 @@ class App extends React.Component {
   };
 
   handleCellClick = (rIndex, cIndex) => {
+    if (this.state.winner) {
+      return;
+    }
     if (this.state.board[rIndex][cIndex]) {
       return;
     }
