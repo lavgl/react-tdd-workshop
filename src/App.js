@@ -20,6 +20,9 @@ class App extends React.Component {
   };
 
   handleCellClick = (rIndex, cIndex) => {
+    if (this.state.board[rIndex][cIndex]) {
+      return;
+    }
     const board = this.state.board.map(row => [...row]);
     board[rIndex][cIndex] = this.state.currentPlayer;
     if (gameStatus(board) === this.state.currentPlayer) {
